@@ -1,10 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:note_app/widget/author_data_model.dart';
+import 'package:note_app/widget/note_model.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ViewNotePage extends StatefulWidget {
-  final AuthorDataModel authorData;
+  //instance of Notemodel which is authordata
+  //Declared Variable
+  final NoteModel authorData;
+  //constructor of noteModel
   const ViewNotePage({Key? key, required this.authorData}) : super(key: key);
 
   @override
@@ -14,26 +16,34 @@ class ViewNotePage extends StatefulWidget {
 class _ViewNotePageState extends State<ViewNotePage> {
   @override
   Widget build(BuildContext context) {
+    //Visual Scaffold for material design
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        backgroundColor: const Color.fromARGB(255, 252, 68, 54),
         centerTitle: false,
-        title: const Text(
+        title: Text(
           'Note Details',
-          style: TextStyle(color: Colors.blueGrey, fontSize: 16),
+          style: GoogleFonts.montserrat(
+            textStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              height: 2,
+              wordSpacing: 1,
+            ),
+          ),
         ),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.blueGrey,
+            color: Colors.white,
           ), //Return Icon
           tooltip: 'Back',
+          //OnPressed The Icon takes You back.
           onPressed: () {
             Navigator.pop(
               context,
-            ); //OnPressed The Icon takes You back.
+            );
           },
         ),
       ),
@@ -42,33 +52,35 @@ class _ViewNotePageState extends State<ViewNotePage> {
           horizontal: 24,
           vertical: 30,
         ),
-        alignment: Alignment.topLeft,
+        alignment: Alignment.topCenter,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 95,
-              ),
-              Text(
-                style:
-                    const TextStyle(fontSize: 20, fontStyle: FontStyle.normal),
-                widget.authorData.title,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                style: const TextStyle(fontStyle: FontStyle.italic),
-                widget.authorData.date,
+              Center(
+                child: Text(
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 252, 68, 54),
+                    fontSize: 20,
+                  ),
+                  widget.authorData.title,
+                ),
               ),
               const SizedBox(
-                height: 15,
+                height: 16,
               ),
               Text(
-                  style: const TextStyle(fontSize: 15),
-                  widget.authorData.description),
+                widget.authorData.description,
+                style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
+                    color: Color.fromARGB(255, 78, 72, 72),
+                    fontSize: 13,
+                    height: 2,
+                    wordSpacing: 1,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
